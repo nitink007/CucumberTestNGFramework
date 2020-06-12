@@ -1,17 +1,31 @@
 package runner;
 
 
+import io.cucumber.java.Scenario;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-@CucumberOptions(features = "src/test/resources/features", glue = "steps", strict = true,
-        plugin = {"pretty","html:target/cucumber-reports/html"})
+@CucumberOptions(features = "src/test/resources",
+                glue = "steps", strict = true,
+                plugin = {"pretty","json:target/cucumber-reports/cucumber.json","html:target/cucumber-html-reports"})
 public class TestRunner extends AbstractTestNGCucumberTests {
+
+    WebDriver driver;
 
     @BeforeSuite
     public void beforeSuit() {
         System.out.println("From testNG before suit");
+        WebDriverManager.chromedriver().setup();
+
+        driver = new ChromeDriver();
+        driver.get("https://google.com");
+        driver.manage().window().maximize();
+
+
     }
 
     @BeforeGroups
@@ -38,6 +52,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     @AfterSuite
     public void afterSuit() {
         System.out.println("From testNG after suit");
+        driver.quit();
     }
 
     @AfterGroups

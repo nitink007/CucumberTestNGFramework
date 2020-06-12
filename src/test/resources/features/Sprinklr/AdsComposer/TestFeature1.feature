@@ -1,4 +1,4 @@
-Feature: This is sample feature
+Feature: This is sample feature from inner folder
 
   Scenario: This sample scenario1
     Given User open "nitin" application
