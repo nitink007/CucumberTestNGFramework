@@ -44,10 +44,11 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         DesiredCapabilities dc = new DesiredCapabilities();
 
         dc.setBrowserName("chrome");
-        dc.setPlatform(Platform.LINUX);
+        dc.setPlatform(Platform.MAC);
 
-        URL url = new URL("http://localhost:4444/wd/hub");
+        URL url = new URL("http://192.168.29.164:4444/wd/hub");
 
+        System.setProperty("webdriver.chrome.driver","/Users/nitinkumar/Documents/Personal/Learning/chromedriver");
         driver = new RemoteWebDriver(url, dc);
         driver.get("https://google.com");
         System.out.println(driver.getTitle());
