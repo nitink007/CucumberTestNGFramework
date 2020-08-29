@@ -10,7 +10,7 @@ public class Feature1StepDef {
     @Given("User open {string} application")
     public void userOpenApplication(String arg0) {
         if (arg0.equals("nitin2"))
-            Assert.fail("known failure - Fail build");
+            Assert.fail("known failure");
     }
 
     @And("user clicks on {string} button")
