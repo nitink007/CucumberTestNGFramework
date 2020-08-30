@@ -5,12 +5,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import org.testng.Assert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class Feature1StepDef {
 
     @Given("User open {string} application")
     public void userOpenApplication(String arg0) {
         if (arg0.equals("nitin2"))
-            Assert.fail("known failure");
+            assertThat("Google").isEqualTo("Gosdogle").describedAs("Page title mismatch");
     }
 
     @And("user clicks on {string} button")

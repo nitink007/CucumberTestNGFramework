@@ -17,10 +17,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.Assertion;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
+
 
 @CucumberOptions(features = "src/test/resources",
                 glue = "steps", strict = true,
@@ -30,7 +36,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     RemoteWebDriver driver;
 
     @BeforeSuite
-    public void beforeSuit() throws MalformedURLException {
+    public void beforeSuit() throws MalformedURLException, UnknownHostException {
         System.out.println("From testNG before suit");
 //        WebDriverManager.chromedriver().setup();
 //        driver = new ChromeDriver();
@@ -43,10 +49,23 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 
         DesiredCapabilities dc = new DesiredCapabilities();
 
-        dc.setBrowserName("chrome");
-        dc.setPlatform(Platform.MAC);
+        String osName = System.getProperty("os.name");
 
-        URL url = new URL("http://192.168.29.164:4444/wd/hub");
+        if (osName.contains("Windows")) {
+            if (osName.equalsIgnoreCase("Windows 10")) {
+                dc.setPlatform(Platform.WIN10);
+            } else {
+                dc.setPlatform(Platform.WINDOWS);
+            }
+        }  else if (osName.contains("mac")) {
+            dc.setPlatform(Platform.MAC);
+        }  else if (osName.contains("linix")) {
+            dc.setPlatform(Platform.LINUX);
+        }
+        dc.setBrowserName("chrome");
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        String hostIpAddress = inetAddress.getHostAddress();
+        URL url = new URL("http://"+hostIpAddress+":4444/wd/hub");
 
         System.setProperty("webdriver.chrome.driver","/Users/nitinkumar/Documents/Personal/Learning/chromedriver");
         driver = new RemoteWebDriver(url, dc);
