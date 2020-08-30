@@ -48,6 +48,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 
         URL url = new URL("http://localhost:4444/wd/hub");
 
+//        System.setProperty("webdriver.chrome.driver","/home/nitin/Downloads/chromedriver");
         driver = new RemoteWebDriver(url, dc);
         driver.get("https://google.com");
         System.out.println(driver.getTitle());
