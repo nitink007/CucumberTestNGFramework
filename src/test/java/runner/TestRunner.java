@@ -6,15 +6,19 @@ import io.cucumber.java.Scenario;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.network.Network;
 import org.openqa.selenium.devtools.network.model.BlockedReason;
 import org.openqa.selenium.devtools.network.model.ResourceType;
+import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.Assertion;
@@ -65,13 +69,28 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         dc.setBrowserName("chrome");
         InetAddress inetAddress = InetAddress.getLocalHost();
         String hostIpAddress = inetAddress.getHostAddress();
-        URL url = new URL("http://"+hostIpAddress+":4444/wd/hub");
+//        URL url = new URL("http://"+hostIpAddress+":4444");
+        URL url = new URL("http://localhost:4444");
 
-        System.setProperty("webdriver.chrome.driver","/Users/nitinkumar/Documents/Personal/Learning/chromedriver");
+//        System.setProperty("webdriver.chrome.driver","/Users/nitinkumar/Documents/Personal/Learning/chromedriver");
         driver = new RemoteWebDriver(url, dc);
         driver.get("https://google.com");
         System.out.println(driver.getTitle());
 
+
+//        /* RemoteWebDriver */
+////        URL gridUrl = new URL("http://localhost:4444");
+//        InetAddress inetAddress = InetAddress.getLocalHost();
+//        String hostIpAddress = inetAddress.getHostAddress();
+//        URL gridUrl = new URL("http://"+hostIpAddress+":4444");
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        RemoteWebDriver webDriver = new RemoteWebDriver(gridUrl, chromeOptions);
+//        /* RemoteWebDriver */
+//        webDriver.get("http://www.google.com/ncr");
+////        webDriver.findElement(By.name("q")).sendKeys("webdriver", Keys.RETURN);
+////        WebDriverWait webDriverWait = new WebDriverWait(webDriver, 5);
+////        webDriverWait.until(ExpectedConditions.titleContains("webdriver"));
+//        webDriver.quit();
 
 
 //        //enable Network

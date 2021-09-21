@@ -12,7 +12,7 @@ public class Feature1StepDef {
     @Given("User open {string} application")
     public void userOpenApplication(String arg0) {
         if (arg0.equals("nitin2"))
-            assertThat("Google").isEqualTo("Gosdogle").describedAs("Page title mismatch");
+            assertThat("Google").isEqualTo("Google").describedAs("Page title mismatch");
     }
 
     @And("user clicks on {string} button")
